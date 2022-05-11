@@ -1,5 +1,5 @@
 # 餐廳清單
-![Preview Image] (./public/image/readmtImg.png)
+![Restaurant List](./public/image/readmeImg.png)
 
 ## 介紹
 
