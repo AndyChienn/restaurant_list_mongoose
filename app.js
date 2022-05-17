@@ -40,7 +40,7 @@ app.get('/', (req, res) => {
     .catch(error => console.log(error))
 })
 
-// add restaurant
+// add Create restaurant
 app.get('/restaurants/new', (req, res) => {
   res.render('new')
 })
@@ -53,9 +53,15 @@ app.post('/restaurants', (req, res) => {
     .catch(err => console.log(err))
 })
 
-app.get('/restaurants/:restaurant_id', (req, res) => {
-  const restaurant = restaurantList.results.find(restaurant => restaurant.id.toString() === req.params.restaurant_id.toString())
-  res.render("show", { restaurant: restaurant })
+// add Read restaurant
+
+app.get('/restaurants/:id', (req, res) => {
+  const id = req.params.id
+  return Restaurant.findById(id)
+    .lean()
+    .then(restaurant => res.render('show', { restaurant }))
+    .then(console.log('show restaurant detail!'))
+    .catch(err => console.log(err))
 })
 
 app.get('/search', (req, res) => {
