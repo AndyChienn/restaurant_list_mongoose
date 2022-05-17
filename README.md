@@ -34,6 +34,7 @@ npm run seed
 ```bash
 node models/seeds/restaurantSeeder.js
 ```
+設置完種子資料可按ctrl + c再進行下一步驟
 6. 安裝及設置完畢後，繼續輸入：
 ```bash
 npm run start
