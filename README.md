@@ -24,20 +24,32 @@
    ```bash
    npm install
    ```
+4.MongoDB 路由設定(終端機)
+   ```bash
+   export MONGODB_URI="<根據自己的MONGODB_URI及帳號密碼做設定>"
+   ```
 
-4. 安裝完畢後，繼續輸入：
+5.使用以下方法使種子資料初始化
+   ```bash
+   npm run seed
+   ```
+   ```bash
+   node models/seeds/restaurantSeeder.js
+   ```
+
+6. 安裝及設置完畢後，繼續輸入：
 
    ```bash
    npm run start
    ```
 
-5. 若看見此行訊息則代表順利運行，打開瀏覽器進入到以下網址
+7. 若看見此行訊息則代表順利運行，打開瀏覽器進入到以下網址
 
    ```bash
    Listening on http://localhost:3000
    ```
 
-6. 暫停使用
+8. 暫停使用
 
    ```bash
    ctrl + c
