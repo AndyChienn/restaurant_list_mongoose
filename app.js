@@ -6,6 +6,8 @@ const exphbs = require('express-handlebars')
 const mongoose = require('mongoose')
 const db = mongoose.connection
 
+const Restaurant = require('./models/Restaurant')
+
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 app.use(express.static('public'))
@@ -26,7 +28,11 @@ db.once('open', () => {
 
 
 app.get('/', (req, res) => {
-  res.render("index", { restaurants: restaurantList.results })
+  Restaurant.find({})
+    .lean()
+    .then(restaurants => res.render('index', { restaurants }))
+    .then(console.log('index rendered!'))
+    .catch(error => console.log(error))
 })
 
 app.get('/restaurants/:restaurant_id', (req, res) => {
