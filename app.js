@@ -69,14 +69,15 @@ app.get('/restaurants/:id/edit', (req, res) => {
   const id = req.params.id
   return Restaurant.findById(id)
     .lean()
-    .then(restaurant => res.render('edit', { restaurant }))
-    .then(console.log('editing!'))
-    .catch(err => console.log(err))
+    .then((restaurant) => res.render('edit', { restaurant }))
+    .catch(error => console.log(error))
 })
+
 
 app.post('/restaurants/:id/edit', (req, res) => {
   const id = req.params.id
   const body = req.body
+  // console.log('body', body)
   return Restaurant.findById(id)
     .then((restaurant) => {
       restaurant.name = body.name
@@ -88,14 +89,29 @@ app.post('/restaurants/:id/edit', (req, res) => {
       restaurant.google_map = body.google_map
       restaurant.rating = body.rating
       restaurant.description = body.description
-      console.log('restaurantbody', restaurant.body)
-      console.log('reqbody', req.body)
+      // console.log('restaurantbody', restaurant.body)
       return restaurant.save()
     })
-    .then(console.log('finished edit!'))
-    .then(res.redirect('/'))
-    .catch(err => console.log(err))
+    .then(() => res.redirect(`/restaurants/${id}`))
+    .catch(error => console.log(error))
 })
+
+app.post('/restaurants/:id/delete', (req, res) => {
+  const id = req.params.id
+  return Restaurant.findById(id)
+    .then(restaurant => restaurant.remove())
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
+})
+// add Delete restaurant
+app.post('/restaurants/:id/delete', (req, res) => {
+  const id = req.params.id
+  return Restaurant.findById(id)
+    .then(restaurant => restaurant.remove())
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
+})
+
 
 app.get('/search', (req, res) => {
   const keyword = req.query.keyword
